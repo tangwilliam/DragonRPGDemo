@@ -16,13 +16,13 @@ public class CameraRaycast : MonoBehaviour
     public float distanceToBackground = 100.0f;
 
     RaycastHit m_Hit;
-    public RaycastHit Hit{ get{
+    public RaycastHit hit{ get{
 
             return m_Hit;
         }}
 
     Layer m_LayerHit;
-    public Layer LayerHit{
+    public Layer layerHit{
         get { return m_LayerHit; }
     }
 
@@ -45,9 +45,9 @@ public class CameraRaycast : MonoBehaviour
 
         foreach( Layer layer in m_Layers ){
             
-            var hit = RaycastLayer(layer) ;
-            if( hit.HasValue ){
-                m_Hit = (RaycastHit)hit;
+            var thisHit = RaycastLayer(layer) ;
+            if( thisHit.HasValue ){
+                m_Hit = (RaycastHit)thisHit;
                 layerThisHit = layer;
                 break;
             }
@@ -67,15 +67,15 @@ public class CameraRaycast : MonoBehaviour
 
 
     RaycastHit? RaycastLayer( Layer layer ){
-
-        RaycastHit hit;
+        
+        RaycastHit aHit;
 
         Ray ray = m_ViewCamera.ScreenPointToRay(Input.mousePosition);
 
         int layerMask = 1 << (int)layer;
 
-        if( Physics.Raycast( ray, out hit, distanceToBackground,  layerMask )){
-            return hit;
+        if( Physics.Raycast( ray, out aHit, distanceToBackground,  layerMask )){
+            return aHit;
         }else{
             return null;
         }

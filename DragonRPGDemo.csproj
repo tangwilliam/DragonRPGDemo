@@ -112,6 +112,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Camera &amp; UI\PlayerHealthBar.cs" />
+    <Compile Include="Assets\Player\Player.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\CameraRaycast.cs" />
     <Compile Include="Assets\Scripts\CursorAffordance.cs" />

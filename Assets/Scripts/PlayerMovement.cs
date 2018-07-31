@@ -6,90 +6,104 @@ using UnityStandardAssets.Characters.ThirdPerson;
 [RequireComponent(typeof(ThirdPersonCharacter))]
 public class PlayerMovement : MonoBehaviour {
 
-    ThirdPersonCharacter m_Character;
-    CameraRaycast m_CameraRaycast;
-    Vector3 m_CurrentMoveTarget;
+    [SerializeField] float walkMoveStopRadius = 0.2f;
+    [SerializeField] float attackMoveStopRadius = 5f;
+    [SerializeField] float stopTinyMovingThreshold = 0.1f;
 
-    public float moveToTargetThresholdDistance = 0.2f;
+    ThirdPersonCharacter thirdPersonCharacter;   // A reference to the ThirdPersonCharacter on the object
+    CameraRaycast cameraRaycast;
+    Vector3 currentDestination, clickPoint;
 
-    bool m_DirectMoveMode = false;
-    bool m_PlayerShouldMove = false;
+    bool isInDirectMode = false;
 
-	// Use this for initialization
-	void Start () {
-
-        m_Character = GetComponent<ThirdPersonCharacter>();
-        m_CameraRaycast = Camera.main.gameObject.GetComponent<CameraRaycast>();
-        m_CurrentMoveTarget = transform.position;
-	}
-	
-
-	// Update is called once per frame
-    void FixedUpdate () {
-
-        if( Input.GetKeyDown(KeyCode.G) ){
-
-            m_DirectMoveMode = !m_DirectMoveMode;
-            m_CurrentMoveTarget = transform.position;
-        }
-
-        if( m_DirectMoveMode ){
-
-            ProcessKeyboardMove();
-        }else{
-            ProcessMouseClickMove();
-        }
-
-	}
-
-    void ProcessKeyboardMove(){
-
-        // Placehold
+    private void Start()
+    {
+        cameraRaycast = Camera.main.GetComponent<CameraRaycast>();
+        thirdPersonCharacter = GetComponent<ThirdPersonCharacter>();
+        currentDestination = transform.position;
     }
 
-    void ProcessMouseClickMove(){
-
-        if (Input.GetMouseButtonDown(0))
+    // Fixed update is called in sync with physics
+    private void FixedUpdate()
+    {
+        if (Input.GetKeyDown(KeyCode.G)) // G for gamepad. TODO add to menu
         {
-            switch (m_CameraRaycast.LayerHit)
-            {
-
-                case Layer.Walkable:
-                    {
-
-                        m_CurrentMoveTarget = m_CameraRaycast.Hit.point;
-                        m_PlayerShouldMove = true;
-                    }
-                    break;
-
-                case Layer.Enemy:
-                    {
-                        print("Player Movement: Can not Move to enemy's position");
-                    }
-                    break;
-
-                case Layer.RaycastEndStop:
-                    {
-                        print("Player Movement: Can not go there");
-                    }
-                    break;
-                default: break;
-            }
+            isInDirectMode = !isInDirectMode; // toggle mode
+            currentDestination = transform.position; // clear the click target
         }
 
-
-
-        Vector3 toTarget = m_CurrentMoveTarget - transform.position;
-        if (toTarget.magnitude > moveToTargetThresholdDistance && m_PlayerShouldMove )
+        if (isInDirectMode)
         {
-            m_Character.Move(toTarget, false, false);
+            ProcessDirectMovement();
         }
         else
         {
-            m_Character.Move(Vector3.zero, false, false);
-            m_PlayerShouldMove = false;
+            ProcessMouseMovement();
         }
+    }
 
-       
+    private void ProcessDirectMovement()
+    {
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+
+        // calculate camera relative direction to move:
+        Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+        Vector3 movement = v * cameraForward + h * Camera.main.transform.right;
+
+        thirdPersonCharacter.Move(movement, false, false);
+    }
+
+    private void ProcessMouseMovement()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            clickPoint = cameraRaycast.hit.point;
+            switch (cameraRaycast.layerHit)
+            {
+                case Layer.Walkable:
+                    currentDestination = ShortDestination(clickPoint, walkMoveStopRadius);
+                    break;
+                case Layer.Enemy:
+                    currentDestination = ShortDestination(clickPoint, attackMoveStopRadius);
+                    break;
+                default:
+                    print("Unexpected layer found");
+                    return;
+            }
+        }
+        WalkToDestination();
+    }
+
+    private void WalkToDestination()
+    {
+        var playerToClickPoint = currentDestination - transform.position;
+        if (playerToClickPoint.magnitude >= stopTinyMovingThreshold )
+        {
+            thirdPersonCharacter.Move(playerToClickPoint, false, false);
+        }
+        else
+        {
+            thirdPersonCharacter.Move(Vector3.zero, false, false);
+        }
+    }
+
+    Vector3 ShortDestination(Vector3 destination, float shortening)
+    {
+        Vector3 reductionVector = (destination - transform.position).normalized * shortening;
+        return destination - reductionVector;
+    }
+
+    void OnDrawGizmos()
+    {
+        // Draw movement gizmos
+        Gizmos.color = Color.black;
+        Gizmos.DrawLine(transform.position, clickPoint);
+        Gizmos.DrawSphere(currentDestination, 0.15f);
+        Gizmos.DrawSphere(clickPoint, 0.1f);
+
+        // Draw attack sphere
+        Gizmos.color = new Color(255f, 0f, 0, .5f);
+        Gizmos.DrawWireSphere(transform.position, attackMoveStopRadius);
     }
 }
