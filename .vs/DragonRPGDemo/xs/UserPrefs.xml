@@ -1,9 +1,11 @@
 ﻿<Properties StartupConfiguration="{6355488D-0823-2AED-6AE4-CE258402ED9F}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="../../DragonRPGFinishedDemo/2-Core-Combat/Assets/Characters/Player/Player.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/ThirdParty/ToLua/Examples/12_GameObject/TestGameObject.cs">
     <Files>
-      <File FileName="Assets/living/Player/Player.cs" Line="8" Column="5" />
-      <File FileName="Assets/living/Living.cs" Line="18" Column="28" />
-      <File FileName="../../DragonRPGFinishedDemo/2-Core-Combat/Assets/Characters/Player/Player.cs" Line="33" Column="36" NotebookId="1" />
+      <File FileName="Assets/ThirdParty/ToLua/Examples/02_ScriptsFromFile/ScriptsFromFile.cs" Line="40" Column="46" />
+      <File FileName="Assets/GameManager/GameManager.cs" Line="18" Column="25" />
+      <File FileName="Assets/GameManager/LuaEngine.cs" Line="32" Column="5" />
+      <File FileName="Assets/ThirdParty/ToLua/Core/LuaState.cs" Line="611" Column="20" />
+      <File FileName="Assets/ThirdParty/ToLua/Examples/12_GameObject/TestGameObject.cs" Line="10" Column="43" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

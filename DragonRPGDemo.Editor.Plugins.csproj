@@ -140,6 +140,12 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="CString">
+      <HintPath>Assets/Plugins/CString.dll</HintPath>
+    </Reference>
+    <Reference Include="Debugger">
+      <HintPath>Assets/Plugins/Debugger.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>/Applications/Unity562/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
     </Reference>
@@ -161,6 +167,11 @@
     <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
+    <None Include="Assets\ThirdParty\ToLua\Injection\InjectionBlackList.txt" />
+    <None Include="Assets\ThirdParty\ToLua\Injection\InjectionBridgeEditorInfo.xml" />
+    <None Include="Assets\ThirdParty\ToLua\Injection\LuaInjectionSkipPaths.txt" />
+    <None Include="Assets\ThirdParty\ToLua\readme.txt" />
+    <None Include="Assets\link.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

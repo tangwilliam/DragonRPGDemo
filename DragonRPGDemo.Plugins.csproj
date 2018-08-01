@@ -95,6 +95,12 @@
     <Reference Include="UnityEngine.VR">
       <HintPath>/Applications/Unity562/Unity562.app/Contents/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
     </Reference>
+    <Reference Include="CString">
+      <HintPath>Assets/Plugins/CString.dll</HintPath>
+    </Reference>
+    <Reference Include="Debugger">
+      <HintPath>Assets/Plugins/Debugger.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>/Applications/Unity562/Unity562.app/Contents/Managed/UnityEditor.dll</HintPath>
     </Reference>
@@ -156,6 +162,11 @@
     <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
+    <None Include="Assets\ThirdParty\ToLua\Injection\InjectionBlackList.txt" />
+    <None Include="Assets\ThirdParty\ToLua\Injection\InjectionBridgeEditorInfo.xml" />
+    <None Include="Assets\ThirdParty\ToLua\Injection\LuaInjectionSkipPaths.txt" />
+    <None Include="Assets\ThirdParty\ToLua\readme.txt" />
+    <None Include="Assets\link.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
