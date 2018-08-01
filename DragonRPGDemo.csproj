@@ -113,12 +113,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Camera &amp; UI\PlayerHealthBar.cs" />
-    <Compile Include="Assets\Player\Player.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\CameraRaycast.cs" />
     <Compile Include="Assets\Scripts\CursorAffordance.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Utility.cs" />
+    <Compile Include="Assets\living\Enemies\Enemy.cs" />
+    <Compile Include="Assets\living\Enemies\EnemyHealthBar.cs" />
+    <Compile Include="Assets\living\Enemies\EnemyUI.cs" />
+    <Compile Include="Assets\living\Living.cs" />
+    <Compile Include="Assets\living\Player\Player.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
