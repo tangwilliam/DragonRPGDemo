@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
         get { return _instance; }
     }
 
+    public LuaEngine luaEngine{ get { return _luaEngine; }}
+
     void Awake()
     {
         _instance = this;
